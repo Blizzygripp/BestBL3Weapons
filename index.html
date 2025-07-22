@@ -7,11 +7,11 @@
     <style>
         /* CSS Variables for easy theme management */
         :root {
-            --background-color: #1a1a2e; /* Darker, slightly blue-ish background (like your image) */
+            --background-color: #1a1a2e; /* Darker, slightly blue-ish background */
             --text-color: #e0e0e0;      /* Light gray for general text */
             --header-color: #bb86fc;    /* A nice purple for main headings */
             --category-color: #03dac6;  /* Teal for category headings */
-            --list-item-background: #2e2e4a; /* Slightly lighter background for list items */
+            --card-background: #2e2e4a; /* Slightly lighter background for cards */
             --link-color: #03dac6;      /* Teal for links/buttons */
             --link-hover-color: #018786; /* Darker teal on hover */
             --border-radius: 8px;
@@ -29,10 +29,10 @@
         }
 
         .container {
-            max-width: 700px; /* Slightly narrower for a cleaner list look */
+            max-width: 1200px; /* Increased max-width for more content */
             margin: var(--spacing-unit) auto;
             padding: var(--spacing-unit);
-            background-color: var(--list-item-background); /* Using this for the main container too */
+            background-color: var(--card-background);
             border-radius: var(--border-radius);
             box-shadow: 0 6px 12px rgba(0, 0, 0, 0.4);
         }
@@ -48,7 +48,9 @@
         /* Category sections */
         .weapon-category {
             margin-bottom: 40px;
-            /* No background here, letting container define it */
+            padding: var(--spacing-unit);
+            background-color: rgba(0, 0, 0, 0.1); /* Slightly transparent overlay for sections */
+            border-radius: var(--border-radius);
         }
 
         .weapon-category h2 {
@@ -62,53 +64,64 @@
             padding-right: 15px; /* Add some space next to border */
         }
 
-        ul {
-            list-style: none;
-            padding: 0;
+        /* Grid for weapon cards */
+        .weapon-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); /* Responsive grid */
+            gap: var(--spacing-unit); /* Gap between grid items */
+            justify-content: center; /* Center cards horizontally when there are fewer than full row */
         }
 
-        li {
-            background-color: rgba(0, 0, 0, 0.2); /* Slightly darker background for each list item */
-            margin-bottom: 10px; /* Space between list items */
-            padding: 15px 20px; /* Padding inside each list item */
+        /* Individual Weapon Card */
+        .weapon-card {
+            background-color: var(--card-background);
             border-radius: var(--border-radius);
-            display: flex; /* Use flexbox for layout inside list item */
-            justify-content: space-between; /* Pushes name to left, button to right */
-            align-items: center; /* Vertically align items */
-            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            overflow: hidden; /* Ensures image doesn't overflow rounded corners */
             transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
-            flex-wrap: wrap; /* Allows items to wrap on very small screens */
+            display: flex; /* Use flexbox for content inside the card */
+            flex-direction: column; /* Stack image, name, button vertically */
+            align-items: center; /* Center content horizontally within the card */
+            text-align: center;
+            padding-bottom: 15px; /* Space below button */
         }
 
-        li:hover {
-            transform: translateY(-3px); /* Subtle lift effect on hover */
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+        .weapon-card:hover {
+            transform: translateY(-5px); /* Lift effect */
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
         }
 
-        li span.weapon-name {
-            font-size: 1.2em;
-            font-weight: bold;
+        .weapon-card img {
+            width: 100%; /* Make image take full width of its container */
+            height: 200px; /* Fixed height for consistency */
+            object-fit: contain; /* Ensures image fits within bounds without cropping, maintains aspect ratio */
+            background-color: rgba(255, 255, 255, 0.05); /* Light background for images */
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            padding: 10px; /* Padding around image within its area */
+            box-sizing: border-box; /* Include padding in width/height */
+        }
+
+        .weapon-card h3 {
             color: var(--text-color);
-            flex-grow: 1; /* Allows name to take up available space */
-            text-align: left; /* Align weapon name to the left */
+            font-size: 1.4em;
+            margin: 15px 10px 10px; /* Space around title */
         }
 
-        li a.details-button {
-            display: inline-block; /* Make it behave like a block element for padding */
+        .weapon-card .details-button {
+            display: inline-block;
             background-color: var(--link-color);
             color: var(--background-color); /* Text color for the button */
-            padding: 8px 15px;
+            padding: 10px 20px;
             border-radius: 5px;
             text-decoration: none;
             font-weight: bold;
             transition: background-color 0.2s ease-in-out, transform 0.1s ease-in-out;
-            white-space: nowrap; /* Prevent button text from wrapping */
-            margin-left: 15px; /* Space between weapon name and button */
+            margin-top: auto; /* Pushes the button to the bottom of the flex container */
         }
 
-        li a.details-button:hover {
+        .weapon-card .details-button:hover {
             background-color: var(--link-hover-color);
-            transform: translateY(-1px);
+            transform: translateY(-2px);
         }
 
         /* Mobile adjustments */
@@ -133,23 +146,27 @@
                 margin-bottom: 20px;
             }
 
-            li {
-                flex-direction: column; /* Stack name and button vertically on smaller screens */
-                align-items: flex-start; /* Align text and button to the left */
-                padding: 12px 15px;
+            .weapon-grid {
+                grid-template-columns: 1fr; /* Stack cards vertically on smaller screens */
+                gap: 15px;
             }
 
-            li span.weapon-name {
-                font-size: 1.1em;
-                margin-bottom: 8px; /* Space between name and button */
-                width: 100%; /* Ensure name takes full width */
+            .weapon-card {
+                padding-bottom: 10px;
             }
 
-            li a.details-button {
-                width: calc(100% - 30px); /* Make button full width minus padding */
-                text-align: center; /* Center button text */
-                margin-left: 0; /* Remove left margin when stacked */
-                padding: 10px;
+            .weapon-card img {
+                height: 180px; /* Slightly smaller image height on mobile */
+            }
+
+            .weapon-card h3 {
+                font-size: 1.2em;
+                margin: 10px;
+            }
+
+            .weapon-card .details-button {
+                padding: 8px 15px;
+                font-size: 0.9em;
             }
         }
 
@@ -161,126 +178,148 @@
             .weapon-category h2 {
                 font-size: 1.5em;
             }
+            .weapon-card img {
+                height: 150px;
+            }
         }
     </style>
 </head>
 <body>
     <div class="container">
         <header>
-            <h1>Weapon List</h1>
+            <h1>My Weapon Collection</h1>
         </header>
 
         <main>
             <section class="weapon-category">
                 <h2>SMG</h2>
-                <ul>
-                    <li>
-                        <span class="weapon-name">Plasma Coil</span>
+                <div class="weapon-grid">
+                    <div class="weapon-card">
+                        <img src="path/to/your/plasma_coil_image.png" alt="Plasma Coil">
+                        <h3>Plasma Coil</h3>
                         <a href="https://www.lootlemon.com/weapon/plasma-coil-bl3" target="_blank" rel="noopener noreferrer" class="details-button">View Details</a>
-                    </li>
-                    <li>
-                        <span class="weapon-name">Flipper</span>
+                    </div>
+                    <div class="weapon-card">
+                        <img src="path/to/your/flipper_image.png" alt="Flipper">
+                        <h3>Flipper</h3>
                         <a href="https://www.lootlemon.com/weapon/flipper-bl3" target="_blank" rel="noopener noreferrer" class="details-button">View Details</a>
-                    </li>
-                    <li>
-                        <span class="weapon-name">Needle Gun</span>
+                    </div>
+                    <div class="weapon-card">
+                        <img src="path/to/your/needle_gun_image.png" alt="Needle Gun">
+                        <h3>Needle Gun</h3>
                         <a href="https://www.lootlemon.com/weapon/needle-gun-bl3" target="_blank" rel="noopener noreferrer" class="details-button">View Details</a>
-                    </li>
-                    <li>
-                        <span class="weapon-name">Dark Army</span>
+                    </div>
+                    <div class="weapon-card">
+                        <img src="path/to/your/dark_army_image.png" alt="Dark Army">
+                        <h3>Dark Army</h3>
                         <a href="https://www.lootlemon.com/weapon/dark-army-bl3" target="_blank" rel="noopener noreferrer" class="details-button">View Details</a>
-                    </li>
-                </ul>
+                    </div>
+                </div>
             </section>
 
             <section class="weapon-category">
                 <h2>ASSAULT RIFLE</h2>
-                <ul>
-                    <li>
-                        <span class="weapon-name">Blade Fury</span>
+                <div class="weapon-grid">
+                    <div class="weapon-card">
+                        <img src="path/to/your/blade_fury_image.png" alt="Blade Fury">
+                        <h3>Blade Fury</h3>
                         <a href="https://www.lootlemon.com/weapon/blade-fury-bl3" target="_blank" rel="noopener noreferrer" class="details-button">View Details</a>
-                    </li>
-                    <li>
-                        <span class="weapon-name">Rowan's Call</span>
+                    </div>
+                    <div class="weapon-card">
+                        <img src="path/to/your/rowans_call_image.png" alt="Rowan's Call">
+                        <h3>Rowan's Call</h3>
                         <a href="https://www.lootlemon.com/weapon/rowans-call-bl3" target="_blank" rel="noopener noreferrer" class="details-button">View Details</a>
-                    </li>
-                    <li>
-                        <span class="weapon-name">Soulrender</span>
+                    </div>
+                    <div class="weapon-card">
+                        <img src="path/to/your/soulrender_image.png" alt="Soulrender">
+                        <h3>Soulrender</h3>
                         <a href="https://www.lootlemon.com/weapon/soulrender-bl3" target="_blank" rel="noopener noreferrer" class="details-button">View Details</a>
-                    </li>
-                </ul>
+                    </div>
+                </div>
             </section>
 
             <section class="weapon-category">
                 <h2>SHOTGUN</h2>
-                <ul>
-                    <li>
-                        <span class="weapon-name">The Butcher</span>
+                <div class="weapon-grid">
+                    <div class="weapon-card">
+                        <img src="path/to/your/the_butcher_image.png" alt="The Butcher">
+                        <h3>The Butcher</h3>
                         <a href="https://www.lootlemon.com/weapon/the-butcher-bl3" target="_blank" rel="noopener noreferrer" class="details-button">View Details</a>
-                    </li>
-                    <li>
-                        <span class="weapon-name">Guardian 4N631</span>
+                    </div>
+                    <div class="weapon-card">
+                        <img src="path/to/your/guardian_4n631_image.png" alt="Guardian 4N631">
+                        <h3>Guardian 4N631</h3>
                         <a href="https://www.lootlemon.com/weapon/guardian-4n631-bl3" target="_blank" rel="noopener noreferrer" class="details-button">View Details</a>
-                    </li>
-                    <li>
-                        <span class="weapon-name">Anarchy</span>
+                    </div>
+                    <div class="weapon-card">
+                        <img src="path/to/your/anarchy_image.png" alt="Anarchy">
+                        <h3>Anarchy</h3>
                         <a href="https://www.lootlemon.com/weapon/anarchy-bl3" target="_blank" rel="noopener noreferrer" class="details-button">View Details</a>
-                    </li>
-                    <li>
-                        <span class="weapon-name">Hellwalker</span>
+                    </div>
+                    <div class="weapon-card">
+                        <img src="path/to/your/hellwalker_image.png" alt="Hellwalker">
+                        <h3>Hellwalker</h3>
                         <a href="https://www.lootlemon.com/weapon/hellwalker-bl3" target="_blank" rel="noopener noreferrer" class="details-button">View Details</a>
-                    </li>
-                </ul>
+                    </div>
+                </div>
             </section>
 
             <section class="weapon-category">
                 <h2>PISTOL</h2>
-                <ul>
-                    <li>
-                        <span class="weapon-name">Free Radical</span>
+                <div class="weapon-grid">
+                    <div class="weapon-card">
+                        <img src="path/to/your/free_radical_image.png" alt="Free Radical">
+                        <h3>Free Radical</h3>
                         <a href="https://www.lootlemon.com/weapon/free-radical-pistol-bl3" target="_blank" rel="noopener noreferrer" class="details-button">View Details</a>
-                    </li>
-                    <li>
-                        <span class="weapon-name">Light Show</span>
+                    </div>
+                    <div class="weapon-card">
+                        <img src="path/to/your/light_show_image.png" alt="Light Show">
+                        <h3>Light Show</h3>
                         <a href="https://www.lootlemon.com/weapon/light-show-bl3" target="_blank" rel="noopener noreferrer" class="details-button">View Details</a>
-                    </li>
-                    <li>
-                        <span class="weapon-name">Tizzy</span>
+                    </div>
+                    <div class="weapon-card">
+                        <img src="path/to/your/tizzy_image.png" alt="Tizzy">
+                        <h3>Tizzy</h3>
                         <a href="https://www.lootlemon.com/weapon/tizzy-bl3" target="_blank" rel="noopener noreferrer" class="details-button">View Details</a>
-                    </li>
-                </ul>
+                    </div>
+                </div>
             </section>
 
             <section class="weapon-category">
                 <h2>SNIPER</h2>
-                <ul>
-                    <li>
-                        <span class="weapon-name">Boogeyman</span>
+                <div class="weapon-grid">
+                    <div class="weapon-card">
+                        <img src="path/to/your/boogeyman_image.png" alt="Boogeyman">
+                        <h3>Boogeyman</h3>
                         <a href="https://www.lootlemon.com/weapon/boogeyman-bl3" target="_blank" rel="noopener noreferrer" class="details-button">View Details</a>
-                    </li>
-                    <li>
-                        <span class="weapon-name">Complex Root</span>
+                    </div>
+                    <div class="weapon-card">
+                        <img src="path/to/your/complex_root_image.png" alt="Complex Root">
+                        <h3>Complex Root</h3>
                         <a href="https://www.lootlemon.com/weapon/complex-root-bl3" target="_blank" rel="noopener noreferrer" class="details-button">View Details</a>
-                    </li>
-                    <li>
-                        <span class="weapon-name">Skullmasher</span>
+                    </div>
+                    <div class="weapon-card">
+                        <img src="path/to/your/skullmasher_image.png" alt="Skullmasher">
+                        <h3>Skullmasher</h3>
                         <a href="https://www.lootlemon.com/weapon/skullmasher-bl3" target="_blank" rel="noopener noreferrer" class="details-button">View Details</a>
-                    </li>
-                </ul>
+                    </div>
+                </div>
             </section>
 
             <section class="weapon-category">
                 <h2>LAUNCHER</h2>
-                <ul>
-                    <li>
-                        <span class="weapon-name">BackBurner</span>
+                <div class="weapon-grid">
+                    <div class="weapon-card">
+                        <img src="path/to/your/backburner_image.png" alt="BackBurner">
+                        <h3>BackBurner</h3>
                         <a href="https://www.lootlemon.com/weapon/backburner-bl3" target="_blank" rel="noopener noreferrer" class="details-button">View Details</a>
-                    </li>
-                    <li>
-                        <span class="weapon-name">Plaguebearer</span>
+                    </div>
+                    <div class="weapon-card">
+                        <img src="path/to/your/plaguebearer_image.png" alt="Plaguebearer">
+                        <h3>Plaguebearer</h3>
                         <a href="https://www.lootlemon.com/weapon/plaguebearer-bl3" target="_blank" rel="noopener noreferrer" class="details-button">View Details</a>
-                    </li>
-                </ul>
+                    </div>
+                </div>
             </section>
         </main>
     </div>
