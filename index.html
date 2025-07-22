@@ -1,61 +1,231 @@
-<html>
+<!DOCTYPE html>
+<html lang="en">
 <head>
-    <meta content="text/html; charset=UTF-8" http-equiv="content-type">
-    <style type="text/css">
-        ol {margin:0;padding:0}
-        table td,table th{padding:0}
-        .c8{color:#000000;font-weight:400;text-decoration:none;vertical-align:baseline;font-size:20pt;font-family:"Arial";font-style:normal}
-        .c6{font-weight:400;text-decoration:none;vertical-align:baseline;font-size:17pt;font-family:"Arial";font-style:normal}
-        .c5{color:#000000;font-weight:400;text-decoration:none;vertical-align:baseline;font-size:11pt;font-family:"Arial";font-style:normal}
-        .c0{padding-top:0pt;padding-bottom:0pt;line-height:1.15;orphans:2;widows:2;text-align:left}
-        .c2{background-color:#121212;text-decoration-skip-ink:none;-webkit-text-decoration-skip:none;color:#1155cc;text-decoration:underline} /* Modified background-color here */
-        .c7{max-width:468pt;padding:72pt 72pt 72pt 72pt}
-        .c1{color:inherit;text-decoration:inherit}
-        .c4{height:11pt}
-        .title{padding-top:0pt;color:#000000;font-size:26pt;padding-bottom:3pt;font-family:"Arial";line-height:1.15;page-break-after:avoid;orphans:2;widows:2;text-align:left}
-        .subtitle{padding-top:0pt;color:#666666;font-size:15pt;padding-bottom:16pt;font-family:"Arial";line-height:1.15;page-break-after:avoid;orphans:2;widows:2;text-align:left}
-        li{color:#000000;font-size:11pt;font-family:"Arial"}
-        p{margin:0;font-size:11pt;font-family:"Arial"}
-        h1{padding-top:20pt;color:#000000;font-size:20pt;padding-bottom:6pt;font-family:"Arial";line-height:1.15;page-break-after:avoid;orphans:2;widows:2;text-align:left}
-        h2{padding-top:18pt;color:#000000;font-size:16pt;padding-bottom:6pt;font-family:"Arial";line-height:1.15;page-break-after:avoid;orphans:2;widows:2;text-align:left}
-        h3{padding-top:16pt;color:#434343;font-size:14pt;padding-bottom:4pt;font-family:"Arial";line-height:1.15;page-break-after:avoid;orphans:2;widows:2;text-align:left}
-        h4{padding-top:14pt;color:#666666;font-size:12pt;padding-bottom:4pt;font-family:"Arial";line-height:1.15;page-break-after:avoid;orphans:2;widows:2;text-align:left}
-        h5{padding-top:12pt;color:#666666;font-size:11pt;padding-bottom:4pt;font-family:"Arial";line-height:1.15;page-break-after:avoid;orphans:2;widows:2;text-align:left}
-        h6{padding-top:12pt;color:#666666;font-size:11pt;padding-bottom:4pt;font-family:"Arial";line-height:1.15;page-break-after:avoid;font-style:italic;orphans:2;widows:2;text-align:left}
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Weapon List</title>
+    <style>
+        /* CSS Variables for easy theme management */
+        :root {
+            --background-color: #1a1a2e; /* Darker, slightly blue-ish background */
+            --text-color: #e0e0e0;      /* Light gray for general text */
+            --header-color: #bb86fc;    /* A nice purple for main headings */
+            --link-color: #03dac6;      /* Teal for links */
+            --link-hover-color: #03dac6; /* Lighter teal on hover */
+            --card-background: #2e2e4a; /* Slightly lighter background for sections */
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: var(--background-color);
+            color: var(--text-color);
+            margin: 0;
+            padding: 20px;
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 40px auto;
+            padding: 30px;
+            background-color: var(--card-background);
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+        }
+
+        header h1 {
+            color: var(--header-color);
+            font-size: 2.8em;
+            text-align: center;
+            margin-bottom: 30px;
+            letter-spacing: 1.5px;
+        }
+
+        section {
+            margin-bottom: 30px;
+            padding: 20px;
+            border-radius: 6px;
+            background-color: rgba(0, 0, 0, 0.1); /* Slightly transparent overlay for sections */
+        }
+
+        section h2 {
+            color: var(--link-color); /* Use link color for category headings */
+            font-size: 1.8em;
+            margin-top: 0;
+            border-bottom: 2px solid var(--link-color);
+            padding-bottom: 10px;
+            margin-bottom: 20px;
+        }
+
+        ul {
+            list-style: none;
+            padding: 0;
+            display: flex;
+            flex-wrap: wrap; /* Allows items to wrap to the next line */
+            gap: 15px; /* Space between list items */
+        }
+
+        li {
+            flex: 1 1 calc(50% - 15px); /* Two columns on larger screens, adjust as needed */
+            min-width: 280px; /* Minimum width before wrapping */
+            font-size: 1.1em;
+            background-color: rgba(0, 0, 0, 0.2);
+            padding: 10px 15px;
+            border-radius: 5px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between; /* Pushes link to the right if space allows */
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+            transition: transform 0.2s ease-in-out;
+        }
+
+        li:hover {
+            transform: translateY(-3px); /* Subtle lift effect on hover */
+        }
+
+        li a {
+            color: var(--link-color);
+            text-decoration: none;
+            font-weight: bold;
+            transition: color 0.2s ease-in-out;
+            word-break: break-all; /* Ensures long links break if needed */
+        }
+
+        li a:hover {
+            color: var(--link-hover-color);
+            text-decoration: underline;
+        }
+
+        /* Responsive adjustments */
+        @media (max-width: 768px) {
+            ul {
+                flex-direction: column; /* Stack items vertically on smaller screens */
+            }
+            li {
+                flex: 1 1 100%; /* Full width on small screens */
+            }
+        }
     </style>
 </head>
-<body class="c7" style="background-color: #121212; color: #ffffff;"> <p class="c0"><span class="c6" style="color: #ffffff;">SMG</span></p>
-    <p class="c0"><span style="background-color: #121212; color: #ffffff;">Plasma Coil </span><span class="c2"><a class="c1" href="https://www.lootlemon.com/weapon/plasma-coil-bl3">https://www.lootlemon.com/weapon/plasma-coil-bl3</a></span></p>
-    <p class="c0"><span style="background-color: #121212; color: #ffffff;">Flipper </span><span class="c2"><a class="c1" href="https://www.lootlemon.com/weapon/flipper-bl3">https://www.lootlemon.com/weapon/flipper-bl3</a></span></p>
-    <p class="c0"><span style="background-color: #121212; color: #ffffff;">Needle Gun</span><span class="c2"><a class="c1" href="https://www.lootlemon.com/weapon/needle-gun-bl3">&nbsp;https://www.lootlemon.com/weapon/needle-gun-bl3</a></span></p>
-    <p class="c0"><span style="background-color: #121212; color: #ffffff;">Dark Army </span><span class="c2"><a class="c1" href="https://www.lootlemon.com/weapon/dark-army-bl3">https://www.lootlemon.com/weapon/dark-army-bl3</a></span></p>
-    <p class="c0 c4"><span class="c5"></span></p>
-    <p class="c0"><span class="c6" style="color: #ffffff;">ASSAULT RIFILE</span></p>
-    <p class="c0"><span style="background-color: #121212; color: #ffffff;">Blade Fury </span><span class="c2"><a class="c1" href="https://www.lootlemon.com/weapon/blade-fury-bl3">https://www.lootlemon.com/weapon/blade-fury-bl3</a></span></p>
-    <p class="c0"><span style="background-color: #121212; color: #ffffff;">Rowan's Call </span><span class="c2"><a class="c1" href="https://www.lootlemon.com/weapon/rowans-call-bl3">https://www.lootlemon.com/weapon/rowans-call-bl3</a></span></p>
-    <p class="c0"><span style="background-color: #121212; color: #ffffff;">Soulrenderer </span><span class="c2"><a class="c1" href="https://www.lootlemon.com/weapon/soulrender-bl3">https://www.lootlemon.com/weapon/soulrender-bl3</a></span></p>
-    <p class="c0 c4"><span class="c5"></span></p>
-    <p class="c0"><span class="c6" style="color: #ffffff;">SHOTGUN</span></p>
-    <p class="c0"><span style="background-color: #121212; color: #ffffff;">The Butcher</span><span class="c2"><a class="c1" href="https://www.lootlemon.com/weapon/the-butcher-bl3">&nbsp;https://www.lootlemon.com/weapon/the-butcher-bl3</a></span></p>
-    <p class="c0"><span style="background-color: #121212; color: #ffffff;">Guardian 4N631 </span><span class="c2"><a class="c1" href="https://www.lootlemon.com/weapon/guardian-4n631-bl3">https://www.lootlemon.com/weapon/guardian-4n631-bl3</a></span></p>
-    <p class="c0"><span style="background-color: #121212; color: #ffffff;">Anarchy </span><span class="c2"><a class="c1" href="https://www.lootlemon.com/weapon/anarchy-bl3">https://www.lootlemon.com/weapon/anarchy-bl3</a></span></p>
-    <p class="c0"><span style="background-color: #121212; color: #ffffff;">Hellwalker </span><span class="c2"><a class="c1" href="https://www.lootlemon.com/weapon/hellwalker-bl3">https://www.lootlemon.com/weapon/hellwalker-bl3</a></span></p>
-    <p class="c0 c4"><span class="c5"></span></p>
-    <p class="c0"><span class="c6" style="color: #ffffff;">PISTOL</span></p>
-    <p class="c0"><span style="background-color: #121212; color: #ffffff;">Free Radical </span><span class="c2"><a class="c1" href="https://www.lootlemon.com/weapon/free-radical-pistol-bl3">https://www.lootlemon.com/weapon/free-radical-pistol-bl3</a></span></p>
-    <p class="c0"><span style="background-color: #121212; color: #ffffff;">Light Show </span><span class="c2"><a class="c1" href="https://www.lootlemon.com/weapon/light-show-bl3">https://www.lootlemon.com/weapon/light-show-bl3</a></span></p>
-    <p class="c0"><span style="background-color: #121212; color: #ffffff;">Tizzy</span><span class="c2"><a class="c1" href="https://www.lootlemon.com/weapon/tizzy-bl3">&nbsp;https://www.lootlemon.com/weapon/tizzy-bl3</a></span></p>
-    <p class="c0 c4"><span class="c5"></span></p>
-    <p class="c0"><span class="c6" style="color: #ffffff;">SNIPER</span></p>
-    <p class="c0"><span style="background-color: #121212; color: #ffffff;">Boogeyman </span><span class="c2"><a class="c1" href="https://www.lootlemon.com/weapon/boogeyman-bl3">https://www.lootlemon.com/weapon/boogeyman-bl3</a></span></p>
-    <p class="c0"><span style="background-color: #121212; color: #ffffff;">Complex Root </span><span class="c2"><a class="c1" href="https://www.lootlemon.com/weapon/complex-root-bl3">https://www.lootlemon.com/weapon/complex-root-bl3</a></span></p>
-    <p class="c0"><span style="background-color: #121212; color: #ffffff;">Skullmasher </span><span class="c2"><a class="c1" href="https://www.lootlemon.com/weapon/skullmasher-bl3">https://www.lootlemon.com/weapon/skullmasher-bl3</a></span></p>
-    <p class="c0 c4"><span class="c5"></span></p>
-    <p class="c0"><span class="c6" style="color: #ffffff;">LAUNCHER</span></p>
-    <p class="c0"><span style="background-color: #121212; color: #ffffff;">BackBurner </span><span class="c2"><a class="c1" href="https://www.lootlemon.com/weapon/backburner-bl3">https://www.lootlemon.com/weapon/backburner-bl3</a></span></p>
-    <p class="c0"><span style="background-color: #121212; color: #ffffff;">Plaguebearer </span><span class="c2"><a class="c1" href="https://www.lootlemon.com/weapon/plaguebearer-bl3">https://www.lootlemon.com/weapon/plaguebearer-bl3</a></span></p>
-    <p class="c0 c4"><span class="c8"></span></p>
-    <p class="c0 c4"><span class="c8"></span></p>
-    <p class="c0 c4"><span class="c8"></span></p>
+<body>
+    <div class="container">
+        <header>
+            <h1>Weapon List</h1>
+        </header>
+
+        <main>
+            <section>
+                <h2>SMG</h2>
+                <ul>
+                    <li>
+                        <span>Plasma Coil</span>
+                        <a href="https://www.lootlemon.com/weapon/plasma-coil-bl3" target="_blank" rel="noopener noreferrer">View Details</a>
+                    </li>
+                    <li>
+                        <span>Flipper</span>
+                        <a href="https://www.lootlemon.com/weapon/flipper-bl3" target="_blank" rel="noopener noreferrer">View Details</a>
+                    </li>
+                    <li>
+                        <span>Needle Gun</span>
+                        <a href="https://www.lootlemon.com/weapon/needle-gun-bl3" target="_blank" rel="noopener noreferrer">View Details</a>
+                    </li>
+                    <li>
+                        <span>Dark Army</span>
+                        <a href="https://www.lootlemon.com/weapon/dark-army-bl3" target="_blank" rel="noopener noreferrer">View Details</a>
+                    </li>
+                </ul>
+            </section>
+
+            <section>
+                <h2>ASSAULT RIFLE</h2>
+                <ul>
+                    <li>
+                        <span>Blade Fury</span>
+                        <a href="https://www.lootlemon.com/weapon/blade-fury-bl3" target="_blank" rel="noopener noreferrer">View Details</a>
+                    </li>
+                    <li>
+                        <span>Rowan's Call</span>
+                        <a href="https://www.lootlemon.com/weapon/rowans-call-bl3" target="_blank" rel="noopener noreferrer">View Details</a>
+                    </li>
+                    <li>
+                        <span>Soulrender</span>
+                        <a href="https://www.lootlemon.com/weapon/soulrender-bl3" target="_blank" rel="noopener noreferrer">View Details</a>
+                    </li>
+                </ul>
+            </section>
+
+            <section>
+                <h2>SHOTGUN</h2>
+                <ul>
+                    <li>
+                        <span>The Butcher</span>
+                        <a href="https://www.lootlemon.com/weapon/the-butcher-bl3" target="_blank" rel="noopener noreferrer">View Details</a>
+                    </li>
+                    <li>
+                        <span>Guardian 4N631</span>
+                        <a href="https://www.lootlemon.com/weapon/guardian-4n631-bl3" target="_blank" rel="noopener noreferrer">View Details</a>
+                    </li>
+                    <li>
+                        <span>Anarchy</span>
+                        <a href="https://www.lootlemon.com/weapon/anarchy-bl3" target="_blank" rel="noopener noreferrer">View Details</a>
+                    </li>
+                    <li>
+                        <span>Hellwalker</span>
+                        <a href="https://www.lootlemon.com/weapon/hellwalker-bl3" target="_blank" rel="noopener noreferrer">View Details</a>
+                    </li>
+                </ul>
+            </section>
+
+            <section>
+                <h2>PISTOL</h2>
+                <ul>
+                    <li>
+                        <span>Free Radical</span>
+                        <a href="https://www.lootlemon.com/weapon/free-radical-pistol-bl3" target="_blank" rel="noopener noreferrer">View Details</a>
+                    </li>
+                    <li>
+                        <span>Light Show</span>
+                        <a href="https://www.lootlemon.com/weapon/light-show-bl3" target="_blank" rel="noopener noreferrer">View Details</a>
+                    </li>
+                    <li>
+                        <span>Tizzy</span>
+                        <a href="https://www.lootlemon.com/weapon/tizzy-bl3" target="_blank" rel="noopener noreferrer">View Details</a>
+                    </li>
+                </ul>
+            </section>
+
+            <section>
+                <h2>SNIPER</h2>
+                <ul>
+                    <li>
+                        <span>Boogeyman</span>
+                        <a href="https://www.lootlemon.com/weapon/boogeyman-bl3" target="_blank" rel="noopener noreferrer">View Details</a>
+                    </li>
+                    <li>
+                        <span>Complex Root</span>
+                        <a href="https://www.lootlemon.com/weapon/complex-root-bl3" target="_blank" rel="noopener noreferrer">View Details</a>
+                    </li>
+                    <li>
+                        <span>Skullmasher</span>
+                        <a href="https://www.lootlemon.com/weapon/skullmasher-bl3" target="_blank" rel="noopener noreferrer">View Details</a>
+                    </li>
+                </ul>
+            </section>
+
+            <section>
+                <h2>LAUNCHER</h2>
+                <ul>
+                    <li>
+                        <span>BackBurner</span>
+                        <a href="https://www.lootlemon.com/weapon/backburner-bl3" target="_blank" rel="noopener noreferrer">View Details</a>
+                    </li>
+                    <li>
+                        <span>Plaguebearer</span>
+                        <a href="https://www.lootlemon.com/weapon/plaguebearer-bl3" target="_blank" rel="noopener noreferrer">View Details</a>
+                    </li>
+                </ul>
+            </section>
+        </main>
+    </div>
 </body>
 </html>
