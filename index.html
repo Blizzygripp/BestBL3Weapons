@@ -1,61 +1,240 @@
+<!DOCTYPE html>
 <html>
 <head>
     <meta content="text/html; charset=UTF-8" http-equiv="content-type">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My GitHub Website</title>
+    <!-- Tailwind CSS CDN for modern styling -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts - Inter for a clean, modern look -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
     <style type="text/css">
+        /* Base body styles for dark theme and Inter font */
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #121212; /* Dark background */
+            color: #ffffff; /* White text */
+            padding: 2rem; /* Add some padding to the body for better spacing */
+            line-height: 1.5; /* Improved line spacing for readability */
+        }
+        /* Reset default list and table paddings */
         ol {margin:0;padding:0}
         table td,table th{padding:0}
-        .c8{color:#000000;font-weight:400;text-decoration:none;vertical-align:baseline;font-size:20pt;font-family:"Arial";font-style:normal}
-        .c6{font-weight:400;text-decoration:none;vertical-align:baseline;font-size:17pt;font-family:"Arial";font-style:normal}
-        .c5{color:#000000;font-weight:400;text-decoration:none;vertical-align:baseline;font-size:11pt;font-family:"Arial";font-style:normal}
-        .c0{padding-top:0pt;padding-bottom:0pt;line-height:1.15;orphans:2;widows:2;text-align:left}
-        .c2{background-color:#121212;text-decoration-skip-ink:none;-webkit-text-decoration-skip:none;color:#1155cc;text-decoration:underline} /* Modified background-color here */
-        .c7{max-width:468pt;padding:72pt 72pt 72pt 72pt}
-        .c1{color:inherit;text-decoration:inherit}
-        .c4{height:11pt}
-        .title{padding-top:0pt;color:#000000;font-size:26pt;padding-bottom:3pt;font-family:"Arial";line-height:1.15;page-break-after:avoid;orphans:2;widows:2;text-align:left}
-        .subtitle{padding-top:0pt;color:#666666;font-size:15pt;padding-bottom:16pt;font-family:"Arial";line-height:1.15;page-break-after:avoid;orphans:2;widows:2;text-align:left}
-        li{color:#000000;font-size:11pt;font-family:"Arial"}
-        p{margin:0;font-size:11pt;font-family:"Arial"}
-        h1{padding-top:20pt;color:#000000;font-size:20pt;padding-bottom:6pt;font-family:"Arial";line-height:1.15;page-break-after:avoid;orphans:2;widows:2;text-align:left}
-        h2{padding-top:18pt;color:#000000;font-size:16pt;padding-bottom:6pt;font-family:"Arial";line-height:1.15;page-break-after:avoid;orphans:2;widows:2;text-align:left}
-        h3{padding-top:16pt;color:#434343;font-size:14pt;padding-bottom:4pt;font-family:"Arial";line-height:1.15;page-break-after:avoid;orphans:2;widows:2;text-align:left}
-        h4{padding-top:14pt;color:#666666;font-size:12pt;padding-bottom:4pt;font-family:"Arial";line-height:1.15;page-break-after:avoid;orphans:2;widows:2;text-align:left}
-        h5{padding-top:12pt;color:#666666;font-size:11pt;padding-bottom:4pt;font-family:"Arial";line-height:1.15;page-break-after:avoid;orphans:2;widows:2;text-align:left}
-        h6{padding-top:12pt;color:#666666;font-size:11pt;padding-bottom:4pt;font-family:"Arial";line-height:1.15;page-break-after:avoid;font-style:italic;orphans:2;widows:2;text-align:left}
+
+        /* Custom classes adapted from your original code, with Tailwind-like values */
+        .c8{color:#ffffff;font-weight:400;text-decoration:none;vertical-align:baseline;font-size:20pt;font-family:"Inter";font-style:normal}
+        .c6{font-weight:600;text-decoration:none;vertical-align:baseline;font-size:1.5rem;font-family:"Inter";font-style:normal; color: #ffffff;} /* Increased font size and made bold for section titles */
+        .c5{color:#ffffff;font-weight:400;text-decoration:none;vertical-align:baseline;font-size:11pt;font-family:"Inter";font-style:normal}
+        .c0{padding-top:0.5rem;padding-bottom:0.5rem;line-height:1.5;text-align:left;} /* Adjusted padding and line height for paragraphs */
+        .c2{background-color:transparent;text-decoration-skip-ink:none;-webkit-text-decoration-skip:none;color:#93c5fd;text-decoration:underline} /* Light blue for links, transparent background */
+        .c7{max-width:468pt;padding:0;} /* Removed padding from c7 as body has padding now, max-width retained */
+        .c1{color:inherit;text-decoration:inherit} /* Inherit color and decoration for inner link span */
+        .c4{height:11pt} /* Small height for empty paragraphs */
+
+        /* Styles for headings to match the dark theme */
+        .title{padding-top:0pt;color:#ffffff;font-size:26pt;padding-bottom:3pt;font-family:"Inter";line-height:1.15;page-break-after:avoid;orphans:2;widows:2;text-align:left}
+        .subtitle{padding-top:0pt;color:#666666;font-size:15pt;padding-bottom:16pt;font-family:"Inter";line-height:1.15;page-break-after:avoid;orphans:2;widows:2;text-align:left}
+        li{color:#ffffff;font-size:11pt;font-family:"Inter"}
+        p{margin:0;font-size:11pt;font-family:"Inter"}
+        h1, h2, h3, h4, h5, h6 {
+            color: #ffffff; /* Ensure all headings are white */
+            line-height: 1.15;
+            page-break-after: avoid;
+            orphans: 2;
+            widows: 2;
+            text-align: left;
+            font-family: "Inter";
+        }
+        h1{padding-top:20pt;font-size:20pt;padding-bottom:6pt;}
+        h2{padding-top:18pt;font-size:16pt;padding-bottom:6pt;}
+        h3{padding-top:16pt;font-size:14pt;padding-bottom:4pt;}
+        h4{padding-top:14pt;font-size:12pt;padding-bottom:4pt;}
+        h5{padding-top:12pt;font-size:11pt;padding-bottom:4pt;}
+        h6{padding-top:12pt;font-size:11pt;padding-bottom:4pt;font-style:italic;}
+
+        /* Custom styles for the link preview tooltip */
+        #link-preview-tooltip {
+            position: absolute;
+            background-color: #2a2a2a; /* Darker background for tooltip */
+            border: 1px solid #444; /* Subtle border */
+            border-radius: 0.5rem; /* Rounded corners for a modern look */
+            padding: 0.75rem; /* Internal padding */
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5); /* Soft shadow */
+            z-index: 100; /* Ensure it's above other content */
+            display: none; /* Hidden by default */
+            max-width: 400px; /* Maximum width for the tooltip */
+            height: 250px; /* Fixed height for the preview area */
+            overflow: hidden; /* Hide scrollbars if content overflows */
+            color: #ffffff; /* White text inside tooltip */
+            font-size: 0.875rem; /* Smaller font size for tooltip text */
+            line-height: 1.25; /* Good line spacing */
+            font-family: 'Inter', sans-serif; /* Consistent font */
+            transition: opacity 0.2s ease-in-out; /* Smooth fade in/out effect */
+            opacity: 0; /* Start fully transparent for transition */
+        }
+
+        /* Class to show the tooltip with fade effect */
+        #link-preview-tooltip.show {
+            display: block;
+            opacity: 1;
+        }
+
+        /* Styles for the iframe inside the tooltip */
+        #link-preview-tooltip iframe {
+            width: 100%;
+            height: calc(100% - 20px); /* Adjust height to leave space for message */
+            border: none; /* No border for the iframe */
+            border-radius: 0.25rem; /* Rounded corners for the iframe */
+            background-color: #333; /* Placeholder background for iframe before loading */
+        }
+        /* Styles for the message displayed in the tooltip */
+        #link-preview-tooltip .message {
+            text-align: center;
+            padding-top: 5px;
+            color: #ccc; /* Lighter grey for messages */
+            font-size: 0.75rem; /* Smaller font for messages */
+        }
     </style>
 </head>
-<body class="c7" style="background-color: #121212; color: #ffffff;"> <p class="c0"><span class="c6" style="color: #ffffff;">SMG</span></p>
-    <p class="c0"><span style="background-color: #121212; color: #ffffff;">Plasma Coil </span><span class="c2"><a class="c1" href="https://www.lootlemon.com/weapon/plasma-coil-bl3">https://www.lootlemon.com/weapon/plasma-coil-bl3</a></span></p>
-    <p class="c0"><span style="background-color: #121212; color: #ffffff;">Flipper </span><span class="c2"><a class="c1" href="https://www.lootlemon.com/weapon/flipper-bl3">https://www.lootlemon.com/weapon/flipper-bl3</a></span></p>
-    <p class="c0"><span style="background-color: #121212; color: #ffffff;">Needle Gun</span><span class="c2"><a class="c1" href="https://www.lootlemon.com/weapon/needle-gun-bl3">&nbsp;https://www.lootlemon.com/weapon/needle-gun-bl3</a></span></p>
-    <p class="c0"><span style="background-color: #121212; color: #ffffff;">Dark Army </span><span class="c2"><a class="c1" href="https://www.lootlemon.com/weapon/dark-army-bl3">https://www.lootlemon.com/weapon/dark-army-bl3</a></span></p>
+<body class="c7">
+    <p class="c0"><span class="c6">SMG</span></p>
+    <p class="c0"><span style="color: #ffffff;">Plasma Coil </span><span class="c2"><a class="c1" href="https://www.lootlemon.com/weapon/plasma-coil-bl3">https://www.lootlemon.com/weapon/plasma-coil-bl3</a></span></p>
+    <p class="c0"><span style="color: #ffffff;">Flipper </span><span class="c2"><a class="c1" href="https://www.lootlemon.com/weapon/flipper-bl3">https://www.lootlemon.com/weapon/flipper-bl3</a></span></p>
+    <p class="c0"><span style="color: #ffffff;">Needle Gun</span><span class="c2"><a class="c1" href="https://www.lootlemon.com/weapon/needle-gun-bl3">&nbsp;https://www.lootlemon.com/weapon/needle-gun-bl3</a></span></p>
+    <p class="c0"><span style="color: #ffffff;">Dark Army </span><span class="c2"><a class="c1" href="https://www.lootlemon.com/weapon/dark-army-bl3">https://www.lootlemon.com/weapon/dark-army-bl3</a></span></p>
     <p class="c0 c4"><span class="c5"></span></p>
-    <p class="c0"><span class="c6" style="color: #ffffff;">ASSAULT RIFILE</span></p>
-    <p class="c0"><span style="background-color: #121212; color: #ffffff;">Blade Fury </span><span class="c2"><a class="c1" href="https://www.lootlemon.com/weapon/blade-fury-bl3">https://www.lootlemon.com/weapon/blade-fury-bl3</a></span></p>
-    <p class="c0"><span style="background-color: #121212; color: #ffffff;">Rowan's Call </span><span class="c2"><a class="c1" href="https://www.lootlemon.com/weapon/rowans-call-bl3">https://www.lootlemon.com/weapon/rowans-call-bl3</a></span></p>
-    <p class="c0"><span style="background-color: #121212; color: #ffffff;">Soulrenderer </span><span class="c2"><a class="c1" href="https://www.lootlemon.com/weapon/soulrender-bl3">https://www.lootlemon.com/weapon/soulrender-bl3</a></span></p>
+    <p class="c0"><span class="c6">ASSAULT RIFILE</span></p>
+    <p class="c0"><span style="color: #ffffff;">Blade Fury </span><span class="c2"><a class="c1" href="https://www.lootlemon.com/weapon/blade-fury-bl3">https://www.lootlemon.com/weapon/blade-fury-bl3</a></span></p>
+    <p class="c0"><span style="color: #ffffff;">Rowan's Call </span><span class="c2"><a class="c1" href="https://www.lootlemon.com/weapon/rowans-call-bl3">https://www.lootlemon.com/weapon/rowans-call-bl3</a></span></p>
+    <p class="c0"><span style="color: #ffffff;">Soulrenderer </span><span class="c2"><a class="c1" href="https://www.lootlemon.com/weapon/soulrender-bl3">https://www.lootlemon.com/weapon/soulrender-bl3</a></span></p>
     <p class="c0 c4"><span class="c5"></span></p>
-    <p class="c0"><span class="c6" style="color: #ffffff;">SHOTGUN</span></p>
-    <p class="c0"><span style="background-color: #121212; color: #ffffff;">The Butcher</span><span class="c2"><a class="c1" href="https://www.lootlemon.com/weapon/the-butcher-bl3">&nbsp;https://www.lootlemon.com/weapon/the-butcher-bl3</a></span></p>
-    <p class="c0"><span style="background-color: #121212; color: #ffffff;">Guardian 4N631 </span><span class="c2"><a class="c1" href="https://www.lootlemon.com/weapon/guardian-4n631-bl3">https://www.lootlemon.com/weapon/guardian-4n631-bl3</a></span></p>
-    <p class="c0"><span style="background-color: #121212; color: #ffffff;">Anarchy </span><span class="c2"><a class="c1" href="https://www.lootlemon.com/weapon/anarchy-bl3">https://www.lootlemon.com/weapon/anarchy-bl3</a></span></p>
-    <p class="c0"><span style="background-color: #121212; color: #ffffff;">Hellwalker </span><span class="c2"><a class="c1" href="https://www.lootlemon.com/weapon/hellwalker-bl3">https://www.lootlemon.com/weapon/hellwalker-bl3</a></span></p>
+    <p class="c0"><span class="c6">SHOTGUN</span></p>
+    <p class="c0"><span style="color: #ffffff;">The Butcher</span><span class="c2"><a class="c1" href="https://www.lootlemon.com/weapon/the-butcher-bl3">&nbsp;https://www.lootlemon.com/weapon/the-butcher-bl3</a></span></p>
+    <p class="c0"><span style="color: #ffffff;">Guardian 4N631 </span><span class="c2"><a class="c1" href="https://www.lootlemon.com/weapon/guardian-4n631-bl3">https://www.lootlemon.com/weapon/guardian-4n631-bl3</a></span></p>
+    <p class="c0"><span style="color: #ffffff;">Anarchy </span><span class="c2"><a class="c1" href="https://www.lootlemon.com/weapon/anarchy-bl3">https://www.lootlemon.com/weapon/anarchy-bl3</a></span></p>
+    <p class="c0"><span style="color: #ffffff;">Hellwalker </span><span class="c2"><a class="c1" href="https://www.lootlemon.com/weapon/hellwalker-bl3">https://www.lootlemon.com/weapon/hellwalker-bl3</a></span></p>
     <p class="c0 c4"><span class="c5"></span></p>
-    <p class="c0"><span class="c6" style="color: #ffffff;">PISTOL</span></p>
-    <p class="c0"><span style="background-color: #121212; color: #ffffff;">Free Radical </span><span class="c2"><a class="c1" href="https://www.lootlemon.com/weapon/free-radical-pistol-bl3">https://www.lootlemon.com/weapon/free-radical-pistol-bl3</a></span></p>
-    <p class="c0"><span style="background-color: #121212; color: #ffffff;">Light Show </span><span class="c2"><a class="c1" href="https://www.lootlemon.com/weapon/light-show-bl3">https://www.lootlemon.com/weapon/light-show-bl3</a></span></p>
-    <p class="c0"><span style="background-color: #121212; color: #ffffff;">Tizzy</span><span class="c2"><a class="c1" href="https://www.lootlemon.com/weapon/tizzy-bl3">&nbsp;https://www.lootlemon.com/weapon/tizzy-bl3</a></span></p>
+    <p class="c0"><span class="c6">PISTOL</span></p>
+    <p class="c0"><span style="color: #ffffff;">Free Radical </span><span class="c2"><a class="c1" href="https://www.lootlemon.com/weapon/free-radical-pistol-bl3">https://www.lootlemon.com/weapon/free-radical-pistol-bl3</a></span></p>
+    <p class="c0"><span style="color: #ffffff;">Light Show </span><span class="c2"><a class="c1" href="https://www.lootlemon.com/weapon/light-show-bl3">https://www.lootlemon.com/weapon/light-show-bl3</a></span></p>
+    <p class="c0"><span style="color: #ffffff;">Tizzy</span><span class="c2"><a class="c1" href="https://www.lootlemon.com/weapon/tizzy-bl3">&nbsp;https://www.lootlemon.com/weapon/tizzy-bl3</a></span></p>
     <p class="c0 c4"><span class="c5"></span></p>
-    <p class="c0"><span class="c6" style="color: #ffffff;">SNIPER</span></p>
-    <p class="c0"><span style="background-color: #121212; color: #ffffff;">Boogeyman </span><span class="c2"><a class="c1" href="https://www.lootlemon.com/weapon/boogeyman-bl3">https://www.lootlemon.com/weapon/boogeyman-bl3</a></span></p>
-    <p class="c0"><span style="background-color: #121212; color: #ffffff;">Complex Root </span><span class="c2"><a class="c1" href="https://www.lootlemon.com/weapon/complex-root-bl3">https://www.lootlemon.com/weapon/complex-root-bl3</a></span></p>
-    <p class="c0"><span style="background-color: #121212; color: #ffffff;">Skullmasher </span><span class="c2"><a class="c1" href="https://www.lootlemon.com/weapon/skullmasher-bl3">https://www.lootlemon.com/weapon/skullmasher-bl3</a></span></p>
+    <p class="c0"><span class="c6">SNIPER</span></p>
+    <p class="c0"><span style="color: #ffffff;">Boogeyman </span><span class="c2"><a class="c1" href="https://www.lootlemon.com/weapon/boogeyman-bl3">https://www.lootlemon.com/weapon/boogeyman-bl3</a></span></p>
+    <p class="c0"><span style="color: #ffffff;">Complex Root </span><span class="c2"><a class="c1" href="https://www.lootlemon.com/weapon/complex-root-bl3">https://www.lootlemon.com/weapon/complex-root-bl3</a></span></p>
+    <p class="c0"><span style="color: #ffffff;">Skullmasher </span><span class="c2"><a class="c1" href="https://www.lootlemon.com/weapon/skullmasher-bl3">https://www.lootlemon.com/weapon/skullmasher-bl3</a></span></p>
     <p class="c0 c4"><span class="c5"></span></p>
-    <p class="c0"><span class="c6" style="color: #ffffff;">LAUNCHER</span></p>
-    <p class="c0"><span style="background-color: #121212; color: #ffffff;">BackBurner </span><span class="c2"><a class="c1" href="https://www.lootlemon.com/weapon/backburner-bl3">https://www.lootlemon.com/weapon/backburner-bl3</a></span></p>
-    <p class="c0"><span style="background-color: #121212; color: #ffffff;">Plaguebearer </span><span class="c2"><a class="c1" href="https://www.lootlemon.com/weapon/plaguebearer-bl3">https://www.lootlemon.com/weapon/plaguebearer-bl3</a></span></p>
+    <p class="c0"><span class="c6">LAUNCHER</span></p>
+    <p class="c0"><span style="color: #ffffff;">BackBurner </span><span class="c2"><a class="c1" href="https://www.lootlemon.com/weapon/backburner-bl3">https://www.lootlemon.com/weapon/backburner-bl3</a></span></p>
+    <p class="c0"><span style="color: #ffffff;">Plaguebearer </span><span class="c2"><a class="c1" href="https://www.lootlemon.com/weapon/plaguebearer-bl3">https://www.lootlemon.com/weapon/plaguebearer-bl3</a></span></p>
     <p class="c0 c4"><span class="c8"></span></p>
     <p class="c0 c4"><span class="c8"></span></p>
     <p class="c0 c4"><span class="c8"></span></p>
+
+    <!-- Link Preview Tooltip Element -->
+    <div id="link-preview-tooltip" class="rounded-lg">
+        <div id="preview-content" class="w-full h-full"></div>
+        <div class="message"></div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // Select all anchor tags with class 'c1'
+            const links = document.querySelectorAll('a.c1');
+            // Get the tooltip and its content/message elements
+            const tooltip = document.getElementById('link-preview-tooltip');
+            const previewContent = document.getElementById('preview-content');
+            const messageDiv = tooltip.querySelector('.message');
+
+            // Iterate over each link to add event listeners
+            links.forEach(link => {
+                link.addEventListener('mouseenter', (event) => {
+                    const url = link.href;
+
+                    // Clear any previous content and messages in the tooltip
+                    previewContent.innerHTML = '';
+                    messageDiv.textContent = '';
+
+                    // Create a new iframe element for the preview
+                    const iframe = document.createElement('iframe');
+                    iframe.src = url; // Set the source of the iframe to the link's URL
+                    // Apply sandbox attributes for security.
+                    // Note: Many websites use X-Frame-Options to prevent embedding,
+                    // so this preview might not work for all external links.
+                    iframe.setAttribute('sandbox', 'allow-scripts allow-forms allow-popups allow-modals allow-orientation-lock allow-pointer-lock allow-same-origin allow-presentation allow-top-navigation');
+                    iframe.style.width = '100%';
+                    iframe.style.height = '100%';
+                    iframe.style.border = 'none';
+                    iframe.style.borderRadius = '0.25rem';
+                    iframe.style.backgroundColor = '#333'; // Placeholder background for the iframe
+
+                    // Handle errors when the iframe fails to load (e.g., due to X-Frame-Options)
+                    iframe.onerror = () => {
+                        messageDiv.textContent = 'Preview not available (security restrictions or content not embeddable).';
+                        previewContent.innerHTML = ''; // Clear iframe if an error occurs
+                    };
+
+                    // Handle iframe load event
+                    iframe.onload = () => {
+                        try {
+                            // Attempt to check if content loaded. Cross-origin access is restricted.
+                            // This check is a heuristic and might not be accurate for all cross-origin cases.
+                            if (iframe.contentWindow && iframe.contentWindow.document && iframe.contentWindow.document.body && iframe.contentWindow.document.body.innerHTML.length < 50) {
+                                messageDiv.textContent = 'Preview content might be limited or unavailable.';
+                            } else {
+                                messageDiv.textContent = `Preview of: ${url}`;
+                            }
+                        } catch (e) {
+                            // This catch block will likely trigger for cross-origin security errors
+                            messageDiv.textContent = 'Preview not available (security restrictions or content not embeddable).';
+                        }
+                    };
+
+                    // Append the iframe to the preview content area
+                    previewContent.appendChild(iframe);
+
+                    // Position the tooltip dynamically next to the hovered link
+                    const linkRect = link.getBoundingClientRect(); // Get the size and position of the link
+                    const tooltipWidth = tooltip.offsetWidth;
+                    const tooltipHeight = tooltip.offsetHeight;
+
+                    // Calculate initial position: 10px to the right of the link
+                    let top = linkRect.top + window.scrollY;
+                    let left = linkRect.right + window.scrollX + 10;
+
+                    // Adjust position if the tooltip goes off the right edge of the screen
+                    if (left + tooltipWidth > window.innerWidth) {
+                        left = linkRect.left + window.scrollX - tooltipWidth - 10; // Position to the left of the link
+                        if (left < 0) { // If still off screen (too far left), align with the link's left edge
+                            left = linkRect.left + window.scrollX;
+                            top = linkRect.bottom + window.scrollY + 10; // Position below the link
+                        }
+                    }
+
+                    // Adjust position if the tooltip goes off the bottom edge of the screen
+                    if (top + tooltipHeight > window.innerHeight + window.scrollY) {
+                        top = linkRect.top + window.scrollY - tooltipHeight - 10; // Position above the link
+                        if (top < 0) { // If still off screen (too far up), position at the top of the viewport
+                            top = 10;
+                        }
+                    }
+
+                    // Apply the calculated position to the tooltip
+                    tooltip.style.top = `${top}px`;
+                    tooltip.style.left = `${left}px`;
+                    // Show the tooltip by adding the 'show' class (triggers CSS transition)
+                    tooltip.classList.add('show');
+                });
+
+                link.addEventListener('mouseleave', () => {
+                    // Hide the tooltip when the mouse leaves the link
+                    tooltip.classList.remove('show');
+                    // Optional: Clear the iframe content immediately to stop loading/rendering
+                    // This can be useful for performance if many links are hovered quickly.
+                    // previewContent.innerHTML = '';
+                });
+            });
+        });
+    </script>
 </body>
 </html>
